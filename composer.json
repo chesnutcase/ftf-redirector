@@ -1,0 +1,18 @@
+{
+    "name": "chesnutcase/ftf-redirector",
+    "description": "Automatically redirects you to the latest FTF (free talk fridays) thread on /r/anime",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "chesnutcase",
+            "email": "chester8991@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^6.3",
+        "sunra/php-simple-html-dom-parser": "^1.5",
+        "querypath/querypath": "^3.0",
+        "ezyang/htmlpurifier": "^4.10"
+    }
+}

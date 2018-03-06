@@ -1,0 +1,4 @@
+# You must either have declared AllowOverride All or AllowOverride FileInfo
+RewriteEngine on
+RewriteRule ^s$ skip.php [L]
+RewriteRule ^skip$ skip.php [L]
