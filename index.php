@@ -1,8 +1,15 @@
 <?php
+require_once "vendor/autoload.php";
 if(!file_exists("datastore.json")){
   include "cronjob.php";
 }
+if(!file_exists("datastore.json")){
+  die("still not here");
+}
 $dataStore = json_decode(file_get_contents("datastore.json"));
+if($dataStore == NULL){
+  var_dump(shell_exec("php cronjob.php"));
+}
 ?>
 <!doctype html>
 <html style="height:100%">
@@ -52,6 +59,7 @@ $dataStore = json_decode(file_get_contents("datastore.json"));
         <br>
         <h2><?php echo substr ($dataStore->title,strpos($dataStore->title,"-")+1); ?></h2>
         <h6><?php echo $dataStore->comments;?></h6>
+        <h6>Last fetched <?php echo Carbon\Carbon::parse($dataStore->lastFetched)->diffForHumans();?></h6>
         <h5>Redirecting you in <span id="timer">3</span>...</h5>
       </div>
     </div>

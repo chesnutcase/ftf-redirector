@@ -1,6 +1,6 @@
 <?php
 
-include "vendor/autoload.php";
+require_once "vendor/autoload.php";
 
 $client = new GuzzleHttp\Client([
   "headers" => [
@@ -13,11 +13,42 @@ $body = $client->get("https://www.reddit.com/r/anime/search?q=subreddit%3Aanime+
 
 $dom = Sunra\PhpSimple\HtmlDomParser::str_get_html($body);
 $dataStore = new stdClass();
-$dataStore->title = $dom->find(".search-result-header")[0]->first_child()->plaintext;
-$dataStore->url = $dom->find(".search-result-header")[0]->first_child()->href;
-$dataStore->comments = $dom->find(".search-result-meta")[0]->find("a")[0]->plaintext;
-if(is_null($dataStore->title) || is_null($dataStore->url) || is_null($dataStore->comments)){
-  die();
+try{
+  $dataStore->title = $dom->find(".search-result-header")[0]->first_child()->plaintext;
+  $dataStore->url = $dom->find(".search-result-header")[0]->first_child()->href;
+  $dataStore->comments = $dom->find(".search-result-meta")[0]->find("a")[0]->plaintext;
+}catch(Exception $ex){
+  handleErrors();
 }
-file_put_contents("datastore.json",json_encode($dataStore));
+if(is_null($dataStore->title) || is_null($dataStore->url) || is_null($dataStore->comments)){
+  handleErrors();
+}else{
+  $dataStore->errorOccurred = "false";
+  $dataStore->lastFetched = Carbon\Carbon::now()->toDateTimeString();
+  checkFileWritable();
+  file_put_contents("datastore.json",json_encode($dataStore));
+}
+function handleErrors(){
+  if(file_exists("datastore.json")){
+    checkFileReadable();
+    $dataStore = json_decode(file_get_contents("datastore.json"));
+  }else{
+    $dataStore = new stdClass();
+    $dataStore->title = "Something broke";
+  }
+  $dataStore->errorOccurred = "true";
+  checkFileWritable();
+  file_put_contents("datastore.json",json_encode($dataStore));
+  die("One of the fields are empty. HNNNGGG!!!");
+}
+function checkFileWritable(){
+  if(!is_writable("datastore.json")){
+    die("datastore.json is not writable. Check your privilege! By the way, I'm running as " . shell_exec("whoami") . " in " . shell_exec("pwd"));
+  }
+}
+function checkFileReadable(){
+  if(!is_readable("datastore.json")){
+    die("datastore.json is not writable. Check your privilege! By the way, I'm running as " . shell_exec("whoami") . " in " . shell_exec("pwd"));
+  }
+}
  ?>
