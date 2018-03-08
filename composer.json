@@ -13,6 +13,7 @@
         "guzzlehttp/guzzle": "^6.3",
         "sunra/php-simple-html-dom-parser": "^1.5",
         "querypath/querypath": "^3.0",
-        "ezyang/htmlpurifier": "^4.10"
+        "ezyang/htmlpurifier": "^4.10",
+        "nesbot/carbon": "^1.23"
     }
 }
