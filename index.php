@@ -60,7 +60,7 @@ if($dataStore == NULL){
         <h2><?php echo substr ($dataStore->title,strpos($dataStore->title,"-")+1); ?></h2>
         <h6><?php echo $dataStore->comments;?></h6>
         <h6>Last fetched <?php echo Carbon\Carbon::parse($dataStore->lastFetched)->diffForHumans();?></h6>
-        <h5>Redirecting you in <span id="timer">3</span>...</h5>
+        <h5>Redirecting you in <span id="timer"><?php echo preg_match("/debug$/",$_SERVER["REQUEST_URI"])?9001:3;?></span>...</h5>
       </div>
     </div>
     <div class="footer">

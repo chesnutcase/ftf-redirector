@@ -2,3 +2,4 @@
 RewriteEngine on
 RewriteRule ^s$ skip.php [L]
 RewriteRule ^skip$ skip.php [L]
+RewriteRule ^debug$ index.php [L]
