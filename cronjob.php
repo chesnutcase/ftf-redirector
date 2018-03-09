@@ -26,28 +26,28 @@ if(is_null($dataStore->title) || is_null($dataStore->url) || is_null($dataStore-
   $dataStore->errorOccurred = "false";
   $dataStore->lastFetched = Carbon\Carbon::now()->toDateTimeString();
   checkFileWritable();
-  file_put_contents("datastore.json",json_encode($dataStore));
+  file_put_contents(__DIR__ . DIRECTORY_SEPARATOR . "datastore.json",json_encode($dataStore));
 }
 function handleErrors(){
-  if(file_exists("datastore.json")){
+  if(file_exists(__DIR__ . DIRECTORY_SEPARATOR . "datastore.json")){
     checkFileReadable();
-    $dataStore = json_decode(file_get_contents("datastore.json"));
+    $dataStore = json_decode(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . "datastore.json"));
   }else{
     $dataStore = new stdClass();
     $dataStore->title = "Something broke";
   }
   $dataStore->errorOccurred = "true";
   checkFileWritable();
-  file_put_contents("datastore.json",json_encode($dataStore));
+  file_put_contents(__DIR__ . DIRECTORY_SEPARATOR . "datastore.json",json_encode($dataStore));
   die("One of the fields are empty. HNNNGGG!!!");
 }
 function checkFileWritable(){
-  if(!is_writable("datastore.json")){
+  if(!is_writable(__DIR__ . DIRECTORY_SEPARATOR . "datastore.json")){
     die("datastore.json is not writable. Check your privilege! By the way, I'm running as " . shell_exec("whoami") . " in " . shell_exec("pwd"));
   }
 }
 function checkFileReadable(){
-  if(!is_readable("datastore.json")){
+  if(!is_readable(__DIR__ . DIRECTORY_SEPARATOR . "datastore.json")){
     die("datastore.json is not writable. Check your privilege! By the way, I'm running as " . shell_exec("whoami") . " in " . shell_exec("pwd"));
   }
 }
