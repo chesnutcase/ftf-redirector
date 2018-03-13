@@ -73,7 +73,9 @@ if($dataStore == NULL){
           Add /s to the end of the url for auto-redirect without loading any HTML
         </div>
         <div class="col-sm-2" style="text-align:right;font-size:16px;">
-          Sauce here
+          <a href="https://github.com/chesnutcase/ftf-redirector">
+            🍝 here
+          </a>
         </div>
         </div>
       </div>
