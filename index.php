@@ -54,14 +54,14 @@ if ($dataStore == null) {
     <div class="h-100 row align-items-center justify-content-center" style="text-align:center">
       <div class="col">
         <img id="header-img" src="//b.thumbs.redditmedia.com/AQ_47wQPWDOEuP0LohFeFYpoa3fdLcqWrgIxDYvU_PI.png" width="148" height="180" alt="anime">
-        <h1 style="font-family:tangerine;font-size:5rem">Free Talk Fridays</h1>
-        <h2 style="font-family:helvetica;font-size:2rem">Now Casual Discussion Fridays</h1>
-        <h6 style="font-family:courier">Automatic Redirector</h6>
+        <h1 style="font-family:tangerine,cursive;font-size:5rem">Free Talk Fridays</h1>
+        <h2 style="font-family:helvetica,san-serif;font-size:2rem">Now Casual Discussion Fridays</h1>
+        <h6 style="font-family:courier,monospace">Automatic Redirector</h6>
         <br>
         <h2><?php echo substr($dataStore->title, strpos($dataStore->title, '-') + 1); ?></h2>
         <h6><?php echo $dataStore->comments; ?></h6>
         <h6>Last fetched <?php echo Carbon\Carbon::parse($dataStore->lastFetched)->diffForHumans(); ?></h6>
-        <h5>Redirecting you in <span id="timer"><?php echo preg_match('/debug$/', $_SERVER['REQUEST_URI']) ? 9001 : 3;?></span>...</h5>
+        <h5>Redirecting you in <span id="timer"><?php echo preg_match('/debug$/', $_SERVER['REQUEST_URI']) ? 9001 : 3; ?></span>...</h5>
       </div>
     </div>
     <div class="footer">
