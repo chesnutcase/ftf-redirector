@@ -1,14 +1,14 @@
 <?php
-require_once "vendor/autoload.php";
-if(!file_exists("datastore.json")){
-  include "cronjob.php";
+require_once 'vendor/autoload.php';
+if (!file_exists('datastore.json')) {
+    include 'cronjob.php';
 }
-if(!file_exists("datastore.json")){
-  die("still not here");
+if (!file_exists('datastore.json')) {
+    die('still not here');
 }
-$dataStore = json_decode(file_get_contents("datastore.json"));
-if($dataStore == NULL){
-  var_dump(shell_exec("php cronjob.php"));
+$dataStore = json_decode(file_get_contents('datastore.json'));
+if ($dataStore == null) {
+    var_dump(shell_exec('php cronjob.php'));
 }
 ?>
 <!doctype html>
@@ -44,7 +44,7 @@ if($dataStore == NULL){
           document.getElementById("timer").innerHTML -= 1;
         }else{
           window.clearInterval(intervalId);
-          window.location = "<?php echo $dataStore->url;?>";
+          window.location = "<?php echo $dataStore->url; ?>";
         }
       },1000);
     };
@@ -55,12 +55,13 @@ if($dataStore == NULL){
       <div class="col">
         <img id="header-img" src="//b.thumbs.redditmedia.com/AQ_47wQPWDOEuP0LohFeFYpoa3fdLcqWrgIxDYvU_PI.png" width="148" height="180" alt="anime">
         <h1 style="font-family:tangerine;font-size:5rem">Free Talk Fridays</h1>
+        <h2 style="font-family:helvetica;font-size:2rem">Now Casual Discussion Fridays</h1>
         <h6 style="font-family:courier">Automatic Redirector</h6>
         <br>
-        <h2><?php echo substr ($dataStore->title,strpos($dataStore->title,"-")+1); ?></h2>
-        <h6><?php echo $dataStore->comments;?></h6>
-        <h6>Last fetched <?php echo Carbon\Carbon::parse($dataStore->lastFetched)->diffForHumans();?></h6>
-        <h5>Redirecting you in <span id="timer"><?php echo preg_match("/debug$/",$_SERVER["REQUEST_URI"])?9001:3;?></span>...</h5>
+        <h2><?php echo substr($dataStore->title, strpos($dataStore->title, '-') + 1); ?></h2>
+        <h6><?php echo $dataStore->comments; ?></h6>
+        <h6>Last fetched <?php echo Carbon\Carbon::parse($dataStore->lastFetched)->diffForHumans(); ?></h6>
+        <h5>Redirecting you in <span id="timer"><?php echo preg_match('/debug$/', $_SERVER['REQUEST_URI']) ? 9001 : 3;?></span>...</h5>
       </div>
     </div>
     <div class="footer">
