@@ -17,7 +17,7 @@ $ftfUrl = $dom->find('.search-result-header')[0]->first_child()->href;
 if (strpos($ftfUrl, 'sort=') == -1) {
     $ftfUrl = preg_replace("/sort=\w+/", 'sort=new', $ftfUrl);
 } else {
-    if (preg_match("/?\w+=\w+/", $ftfUrl) == 1) {
+    if (preg_match("/\?\w+=\w+/", $ftfUrl) == 1) {
         $ftfUrl = $ftfUrl.'&sort=new';
     } else {
         $ftfUrl = $ftfUrl.'?sort=new';
